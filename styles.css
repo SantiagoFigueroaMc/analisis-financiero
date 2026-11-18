@@ -141,6 +141,167 @@ details.card:not([open]) > :not(summary) {
     line-height: 1.55;
 }
 
+.balance-year-label {
+    display: block;
+    margin: 14px 0 6px;
+    color: #52657d;
+    font-size: 0.85rem;
+    font-weight: 650;
+}
+
+#balance-year,
+.account-classification {
+    padding: 8px;
+    border: 1px solid #dce5ee;
+    border-radius: 7px;
+    background: #fff;
+    color: #233a58;
+    font: inherit;
+}
+
+.account-classification {
+    display: block;
+    max-width: 100%;
+    margin-top: 8px;
+    font-size: 0.8rem;
+}
+
+.balance-tables {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 20px;
+}
+
+.balance-card {
+    margin-top: 0;
+}
+
+.balance-card h3 {
+    margin: 0;
+    color: #1d3555;
+    font-size: 1rem;
+}
+
+.add-account-button {
+    display: block;
+    margin-top: 8px;
+    padding: 6px 9px;
+    font-size: 0.75rem;
+}
+
+.delete-account-button {
+    display: block;
+    margin-top: 8px;
+    padding: 5px 9px;
+    border: 1px solid #e6b7b2;
+    background: #fff;
+    color: #a33b32;
+    font-size: 0.75rem;
+}
+
+.delete-account-button:hover {
+    background: #fff2f0;
+}
+
+#account-dialog {
+    width: min(420px, calc(100% - 32px));
+    padding: 24px;
+    border: 1px solid #e3eaf2;
+    border-radius: 16px;
+    color: #233a58;
+    box-shadow: 0 16px 40px rgba(28, 47, 74, 0.2);
+}
+
+#account-dialog::backdrop {
+    background: rgba(19, 39, 68, 0.48);
+}
+
+#account-dialog h3 {
+    margin: 0;
+    color: #1d3555;
+}
+
+#account-dialog p {
+    margin: 8px 0 20px;
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+#account-dialog label {
+    display: block;
+    margin-bottom: 8px;
+    color: #52657d;
+    font-size: 0.82rem;
+    font-weight: 650;
+}
+
+.account-dialog-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 8px;
+    margin-top: 20px;
+}
+
+#cancel-account {
+    background: #e8eef5;
+    color: #334865;
+}
+
+#cancel-account:hover {
+    background: #dce5ee;
+}
+
+#account-dialog input {
+    width: 100%;
+    padding: 9px 10px;
+    border: 1px solid #dce5ee;
+    border-radius: 7px;
+    color: #233a58;
+    font: inherit;
+}
+
+#account-dialog input:focus {
+    border-color: #45a99b;
+    outline: 3px solid rgba(69, 169, 155, 0.16);
+}
+
+.balance-card tbody th {
+    white-space: normal;
+    overflow-wrap: anywhere;
+}
+
+.balance-card .account-section th,
+.balance-card .account-section td {
+    background: #f3f8f7;
+    color: #167f73;
+}
+
+.balance-card .account-section td {
+    font-weight: 750;
+    text-align: right;
+}
+
+.balance-card .account-total th,
+.balance-card .account-total td {
+    background: #f8fafc;
+    font-weight: 750;
+}
+
+.balance-card .account-total td {
+    text-align: right;
+}
+
+.account-error {
+    margin: 0;
+    padding: 12px 20px;
+    color: #a33b32;
+    font-size: 0.82rem;
+}
+
+.balance-card .financial-input:invalid {
+    border-color: #c04c4c;
+}
+
 .formula-card h3 {
     margin: 0;
     color: #1d3555;
@@ -217,6 +378,35 @@ details.card:not([open]) > :not(summary) {
     color: #52657d;
     font-size: 0.88rem;
     line-height: 1.5;
+}
+
+.indicator-interpretation {
+    color: #52657d;
+    font-size: 0.84rem;
+    line-height: 1.55;
+}
+
+.indicator-interpretation h4 {
+    margin: 0 0 7px;
+    color: #334865;
+    font-size: 0.8rem;
+}
+
+.indicator-interpretation p {
+    margin: 0 0 8px;
+}
+
+.indicator-interpretation .interpretation-context {
+    color: #64748b;
+    font-size: 0.8rem;
+}
+
+.indicator-info-interpretation {
+    margin-bottom: 16px;
+}
+
+.formula-interpretation {
+    padding: 0 24px 20px;
 }
 
 .indicator-info-formula {
@@ -446,6 +636,10 @@ button:focus-visible {
 
     .card-heading {
         padding: 16px;
+    }
+
+    .balance-tables {
+        grid-template-columns: 1fr;
     }
 
     .formula-display {

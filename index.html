@@ -27,10 +27,69 @@
             </div>
         </section>
 
+        <section aria-labelledby="balance-heading">
+            <div class="section-heading">
+                <h2 id="balance-heading">Cuentas del balance general</h2>
+                <p>Selecciona el año y agrega sus cuentas. En activo corriente, los indicadores reconocen los nombres exactos Caja, Cuentas por cobrar y Existencias, sin distinguir mayúsculas ni espacios adicionales. Clasifica las cuentas de proveedores en pasivo corriente. Las cuentas sin importe se excluyen de los totales; los datos sin cuentas con importe se muestran como N/A.</p>
+                <p>Las cuentas guardadas anteriormente se asignan a Year 1; los pasivos existentes quedan inicialmente como corrientes. Si necesitas cambiar una cuenta de sección, elimínala y agrégala nuevamente en la sección correcta.</p>
+                <label class="balance-year-label" for="balance-year">Año del balance</label>
+                <select id="balance-year"></select>
+            </div>
+            <div class="balance-tables">
+                <section class="card balance-card" aria-labelledby="assets-heading">
+                    <div class="card-heading">
+                        <h3 id="assets-heading">Activos</h3>
+                    </div>
+                    <div class="table-scroll">
+                        <table id="assets-table">
+                            <thead><tr><th scope="col">Cuenta</th><th scope="col">Importe</th></tr></thead>
+                            <tbody>
+                                <tr class="account-section" data-section="current"><th scope="row"><span>Activo corriente</span><button class="add-account-button" type="button" aria-label="Agregar cuenta a activo corriente">Agregar cuenta</button></th><td><output>—</output></td></tr>
+                                <tr class="account-section" data-section="other"><th scope="row"><span>Activo fijo</span><button class="add-account-button" type="button" aria-label="Agregar cuenta a activo fijo">Agregar cuenta</button></th><td><output>—</output></td></tr>
+                                <tr class="account-total" data-total="assets"><th scope="row">Total activo</th><td><output>—</output></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="account-error" data-account-error="assets" role="status" hidden>Ingresa importes numéricos válidos para calcular el total.</p>
+                </section>
+                <section class="card balance-card" aria-labelledby="liabilities-heading">
+                    <div class="card-heading">
+                        <h3 id="liabilities-heading">Pasivos y patrimonio neto</h3>
+                    </div>
+                    <div class="table-scroll">
+                        <table id="liabilities-table">
+                            <thead><tr><th scope="col">Cuenta</th><th scope="col">Importe</th></tr></thead>
+                            <tbody>
+                                <tr class="account-section" data-section="current"><th scope="row"><span>Pasivo corriente</span><button class="add-account-button" type="button" aria-label="Agregar cuenta a pasivo corriente">Agregar cuenta</button></th><td><output>—</output></td></tr>
+                                <tr class="account-section" data-section="noncurrent"><th scope="row"><span>Pasivo no corriente</span><button class="add-account-button" type="button" aria-label="Agregar cuenta a pasivo no corriente">Agregar cuenta</button></th><td><output>—</output></td></tr>
+                                <tr class="account-total" data-total="liabilities"><th scope="row">Total pasivo</th><td><output>—</output></td></tr>
+                                <tr class="account-section" data-section="equity"><th scope="row" colspan="2"><span>Patrimonio neto</span><button class="add-account-button" type="button" aria-label="Agregar cuenta a patrimonio neto">Agregar cuenta</button></th></tr>
+                                <tr class="account-total" data-total="liabilitiesAndEquity"><th scope="row">Total pasivo y patrimonio neto</th><td><output>—</output></td></tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="account-error" data-account-error="liabilities" role="status" hidden>Ingresa importes numéricos válidos para calcular los totales.</p>
+                </section>
+            </div>
+            <dialog id="account-dialog" aria-labelledby="account-dialog-title">
+                <form id="account-form">
+                    <h3 id="account-dialog-title">Agregar cuenta</h3>
+                    <p id="account-dialog-context"></p>
+                    <label for="account-name">Nombre de la cuenta</label>
+                    <input id="account-name" name="accountName" type="text" required autofocus>
+                    <div class="account-dialog-actions">
+                        <button type="button" id="cancel-account">Cancelar</button>
+                        <button type="submit">Agregar</button>
+                    </div>
+                </form>
+            </dialog>
+        </section>
+
         <section class="card" aria-labelledby="data-heading">
             <div class="card-heading">
                 <h2 id="data-heading">Datos financieros por año</h2>
             </div>
+            <p class="table-note">Los valores del balance se calculan a partir de las cuentas de cada año y no se editan aquí.</p>
             <div class="table-scroll">
                 <table id="financial_inputs">
                     <thead></thead>

@@ -56,6 +56,8 @@ var indicators = [
         id: "gross-margin",
         label: "Margen bruto",
         description: "Muestra qué porcentaje de las ventas queda después de cubrir el costo directo de los productos o servicios vendidos. El saldo contribuye a cubrir los demás gastos y generar utilidad.",
+        high_value_description: "Un margen alto deja una mayor proporción de las ventas para cubrir otros gastos y generar utilidad.",
+        low_value_description: "Un margen bajo deja menos recursos para cubrir los demás gastos y puede reflejar costos de venta elevados o precios reducidos.",
         variables: ["sales", "costOfSales"],
         unit: "percent",
         calculateAmount: function(v){
@@ -74,6 +76,8 @@ var indicators = [
         id: "operating-margin",
         label: "Margen operativo",
         description: "Mide la rentabilidad de la operación antes de intereses e impuestos. Descuenta de las ventas el costo de ventas, los GAV y la depreciación.",
+        high_value_description: "Un margen alto indica que la operación conserva una mayor proporción de las ventas antes de intereses e impuestos.",
+        low_value_description: "Un margen bajo indica que los costos y gastos operativos absorben gran parte de las ventas; si es negativo, hay pérdida operativa.",
         variables: ["sales", "costOfSales", "sellingAdmin", "depreciation"],
         unit: "percent",
         calculateAmount: function(v){
@@ -92,6 +96,8 @@ var indicators = [
         id: "ebitda",
         label: "EBITDA",
         description: "Estima el resultado de la operación antes de intereses, impuestos, depreciación y amortización. Su porcentaje sobre ventas muestra el margen EBITDA. Es una aproximación al flujo de caja operativo, pero no equivale al efectivo disponible.",
+        high_value_description: "Un EBITDA alto refleja un mayor resultado antes de intereses, impuestos, depreciación y amortización; considera también el margen para comparar empresas de distinto tamaño.",
+        low_value_description: "Un EBITDA bajo indica menor capacidad de generar resultado antes de esas partidas; si es negativo, los ingresos no cubren los costos y gastos considerados.",
         variables: ["sales", "costOfSales", "sellingAdmin"],
         unit: "amount",
         formulaLabel: "EBITDA es igual a ventas menos costo de ventas y gastos de administración y ventas. El margen EBITDA es EBITDA dividido por ventas, multiplicado por cien",
@@ -110,6 +116,8 @@ var indicators = [
         id: "net-margin",
         label: "Margen neto",
         description: "Indica qué porcentaje de las ventas se convierte en resultado neto después de costos, gastos, intereses e impuestos.",
+        high_value_description: "Un margen alto indica que una mayor proporción de las ventas se convierte en resultado neto.",
+        low_value_description: "Un margen bajo deja poca utilidad por unidad vendida; si es negativo, la empresa registra pérdidas.",
         variables: ["netIncome", "sales"],
         unit: "percent",
         calculateAmount: function(v){
@@ -125,6 +133,8 @@ var indicators = [
         id: "roa",
         label: "ROA (rentabilidad sobre activos)",
         description: "Mide cuánto resultado operativo generan los activos de la empresa, independientemente de si se financiaron con deuda o patrimonio. Se presenta antes de impuestos.",
+        high_value_description: "Un ROA alto indica mayor resultado operativo por unidad de activo invertido.",
+        low_value_description: "Un ROA bajo indica menor resultado operativo respecto de los activos; si es negativo, la operación genera pérdidas.",
         variables: ["sales", "costOfSales", "sellingAdmin", "depreciation", "totalAssets"],
         unit: "percent",
         formulaLabel: "ROA es igual al resultado operativo dividido por activo total, multiplicado por cien",
@@ -141,6 +151,8 @@ var indicators = [
         id: "roe",
         label: "ROE (rentabilidad sobre patrimonio)",
         description: "Mide el resultado neto generado por cada unidad de patrimonio neto; aproxima la rentabilidad para los accionistas.",
+        high_value_description: "Un ROE alto indica mayor resultado neto respecto del patrimonio; puede estar influido por un endeudamiento elevado.",
+        low_value_description: "Un ROE bajo indica menor resultado neto respecto del patrimonio. Con patrimonio negativo, el ratio puede ser engañoso y requiere análisis adicional.",
         variables: ["netIncome", "equity"],
         unit: "percent",
         formulaLabel: "ROE es igual al resultado neto dividido por patrimonio neto, multiplicado por cien",
@@ -152,7 +164,9 @@ var indicators = [
     {
         id: "current-ratio",
         label: "Razón corriente",
-        description: "Compara los activos corrientes con las obligaciones de corto plazo para mostrar cuántas veces podrían cubrirlas.",
+        description: "Compara los activos corrientes con las obligaciones de corto plazo para mostrar cuántas veces podrían cubrirlas. Un valor muy alto puede significar una ineficiencia dado un exceso de caja o recursos ocioso en la empresa.",
+        high_value_description: "Un valor muy alto puede indicar exceso de caja o recursos ociosos en la empresa.",
+        low_value_description: "Un valor muy bajo puede indicar problemas de liquidez.",
         variables: ["currentAssets", "currentLiabilities"],
         unit: "multiple",
         formulaLabel: "Razón corriente es igual a activo corriente dividido por pasivo corriente",
@@ -165,6 +179,8 @@ var indicators = [
         id: "acid-test",
         label: "Prueba ácida",
         description: "Evalúa la cobertura de las obligaciones de corto plazo excluyendo las existencias, que pueden ser menos líquidas que otros activos corrientes.",
+        high_value_description: "Un valor alto indica mayor cobertura del pasivo corriente sin depender de vender existencias; un exceso puede reflejar recursos poco aprovechados.",
+        low_value_description: "Un valor bajo indica menor cobertura con activos corrientes distintos de las existencias y mayor dependencia de su venta o de financiación.",
         variables: ["currentAssets", "endingInventory", "currentLiabilities"],
         unit: "multiple",
         formulaLabel: "Prueba ácida es igual a activo corriente menos existencias, dividido por pasivo corriente",
@@ -180,6 +196,8 @@ var indicators = [
         id: "cash-days",
         label: "Días de caja",
         description: "Estima cuántos días de gastos del período podría cubrir el saldo de caja disponible al cierre.",
+        high_value_description: "Más días indican mayor cobertura de los gastos históricos con la caja al cierre, aunque un exceso podría reflejar recursos ociosos.",
+        low_value_description: "Menos días indican menor reserva de caja frente a los gastos históricos y mayor exposición a tensiones de liquidez.",
         variables: ["cash", "costOfSales", "sellingAdmin", "depreciation", "financialInterests", "incomeTaxes"],
         unit: "days",
         formulaLabel: "Días de caja es igual a caja dividida por la suma del costo de ventas, gastos de administración y ventas, depreciación, intereses e impuestos, multiplicado por 360",
@@ -196,6 +214,8 @@ var indicators = [
         id: "leverage",
         label: "Leverage",
         description: "Compara los recursos aportados por terceros (pasivo total) con los recursos aportados por la empresa (patrimonio neto).",
+        high_value_description: "Un valor alto indica mayor financiación de terceros respecto del patrimonio y puede aumentar el riesgo financiero.",
+        low_value_description: "Un valor bajo indica menor dependencia relativa del pasivo. Si el patrimonio es negativo, el ratio requiere una interpretación especial.",
         variables: ["totalLiabilities", "equity"],
         unit: "multiple",
         formulaLabel: "Leverage es igual a pasivo total dividido por patrimonio neto",
@@ -208,6 +228,8 @@ var indicators = [
         id: "collection-days",
         label: "Días de cobro a clientes",
         description: "Estima el plazo promedio, en días, que tarda la empresa en cobrar las cuentas pendientes de sus clientes.",
+        high_value_description: "Más días indican que las cuentas por cobrar representan un mayor plazo de ventas; puede reflejar condiciones de crédito más largas o demoras en el cobro.",
+        low_value_description: "Menos días indican una recuperación más rápida respecto de las ventas, aunque también pueden reflejar condiciones comerciales más restrictivas.",
         variables: ["accountsReceivable", "sales"],
         unit: "days",
         formulaLabel: "Días de cobro a clientes es igual a cuentas por cobrar dividido por ventas del período, multiplicado por 360",
@@ -220,6 +242,8 @@ var indicators = [
         id: "inventory-days",
         label: "Días de existencia",
         description: "Estima para cuántos días de ventas alcanza el inventario al cierre, usando el costo de ventas diario del período.",
+        high_value_description: "Más días indican mayor cobertura de existencias, pero también pueden señalar exceso de inventario o recursos inmovilizados.",
+        low_value_description: "Menos días indican menor inventario relativo al costo de ventas, aunque pueden aumentar el riesgo de faltantes.",
         variables: ["endingInventory", "costOfSales"],
         unit: "days",
         formulaLabel: "Días de existencia es igual a existencias al cierre dividido por costo de ventas, multiplicado por 360",
@@ -232,6 +256,8 @@ var indicators = [
         id: "supplier-days",
         label: "Días de pago a proveedores",
         description: "Estima el plazo promedio de pago a proveedores. Las compras se calculan como existencias finales menos iniciales más costo de ventas.",
+        high_value_description: "Más días pueden proporcionar financiación de proveedores, pero también reflejar pagos atrasados o tensiones de liquidez.",
+        low_value_description: "Menos días indican pagos más rápidos y menor financiación de proveedores; podrían responder a las condiciones pactadas o a descuentos por pronto pago.",
         variables: ["suppliers", "endingInventory", "openingInventory", "costOfSales"],
         unit: "days",
         formulaLabel: "Días de pago a proveedores es igual a proveedores dividido por existencias al cierre menos existencias iniciales más costo de ventas, multiplicado por 360",
@@ -248,6 +274,25 @@ var indicators = [
 
 var years = [1, 2];
 var valuesByField = {};
+var accountsByYear = [{ assets: [], liabilities: [] }, { assets: [], liabilities: [] }];
+var selectedBalanceYear = 0;
+var accountSections = { assets: ["current", "other"], liabilities: ["current", "noncurrent", "equity"] };
+var accountCategories = {
+    assets: { current: ["cash", "accountsReceivable", "endingInventory"], other: [] },
+    liabilities: { current: ["suppliers"], noncurrent: [], equity: [] }
+};
+var balanceFields = ["totalAssets", "currentAssets", "currentLiabilities", "endingInventory", "cash", "totalLiabilities", "equity", "accountsReceivable", "suppliers"];
+
+function assetAccountCategory(account){
+    if (account.section !== "current") {
+        return "";
+    }
+    var name = account.name.trim().replace(/\s+/g, " ").toLocaleLowerCase("es");
+    if (name === "caja") return "cash";
+    if (name === "cuentas por cobrar") return "accountsReceivable";
+    if (name === "existencias") return "endingInventory";
+    return "";
+}
 
 fields.forEach(function(field){
     valuesByField[field.key] = [NaN, NaN];
@@ -260,7 +305,7 @@ function showStorageError(message){
 }
 
 function isValidSavedState(state){
-    if (!state || state.version !== 1 || !Array.isArray(state.years) || state.years.length < 2) {
+    if (!state || ![1, 2].includes(state.version) || !Array.isArray(state.years) || state.years.length < 2) {
         return false;
     }
 
@@ -274,7 +319,25 @@ function isValidSavedState(state){
         return false;
     }
 
-    return fields.every(function(field){
+    function validGroups(accounts, legacy){
+        return accounts && typeof accounts === "object" && ["assets", "liabilities"].every(function(group){
+            return Array.isArray(accounts[group]) && accounts[group].every(function(account){
+                return account && typeof account.name === "string" && account.name.trim() !== ""
+                    && typeof account.amount === "string"
+                    && (legacy
+                        ? (account.section === undefined || (group === "assets" ? ["current", "other"] : ["liabilities", "equity"]).includes(account.section))
+                        : accountSections[group].includes(account.section) && typeof account.category === "string"
+                            && (account.category === "" || accountCategories[group][account.section].includes(account.category)));
+            });
+        });
+    }
+
+    var validAccounts = state.version === 1
+        ? state.accounts === undefined || validGroups(state.accounts, true)
+        : Array.isArray(state.accountsByYear) && state.accountsByYear.length === state.years.length
+            && state.accountsByYear.every(function(accounts){ return validGroups(accounts, false); });
+
+    return validAccounts && fields.every(function(field){
         var savedValues = state.values[field.key];
         return Array.isArray(savedValues)
             && savedValues.length === state.years.length
@@ -311,6 +374,21 @@ function restoreSessionState(){
     }
 
     years = state.years.slice();
+    accountsByYear = state.version === 2 ? state.accountsByYear : years.map(function(){
+        return { assets: [], liabilities: [] };
+    });
+    if (state.version === 1 && state.accounts !== undefined) {
+        ["assets", "liabilities"].forEach(function(group){
+            accountsByYear[0][group] = state.accounts[group].map(function(account){
+                return {
+                    name: account.name,
+                    amount: account.amount,
+                    section: account.section === undefined || account.section === "liabilities" ? "current" : account.section,
+                    category: ""
+                };
+            });
+        });
+    }
     fields.forEach(function(field){
         valuesByField[field.key] = state.values[field.key].map(function(value){
             return value === null ? NaN : value;
@@ -320,9 +398,10 @@ function restoreSessionState(){
 
 function saveSessionState(){
     var state = {
-        version: 1,
+        version: 2,
         years: years,
-        values: {}
+        values: {},
+        accountsByYear: accountsByYear
     };
 
     fields.forEach(function(field){
@@ -363,6 +442,30 @@ function createInfoButton(indicator, context){
     return button;
 }
 
+function createIndicatorInterpretation(indicator){
+    var section = document.createElement("section");
+    section.className = "indicator-interpretation";
+    var heading = document.createElement("h4");
+    heading.textContent = "Interpretación";
+    section.appendChild(heading);
+    [
+        ["Valor alto", indicator.high_value_description],
+        ["Valor bajo", indicator.low_value_description]
+    ].forEach(function(item){
+        var paragraph = document.createElement("p");
+        var label = document.createElement("strong");
+        label.textContent = item[0] + ": ";
+        paragraph.appendChild(label);
+        paragraph.appendChild(document.createTextNode(item[1]));
+        section.appendChild(paragraph);
+    });
+    var context = document.createElement("p");
+    context.className = "interpretation-context";
+    context.textContent = "Compara con el sector y la evolución histórica; no existe un umbral universal.";
+    section.appendChild(context);
+    return section;
+}
+
 function createIndicatorInfoPopup(){
     var popup = document.createElement("aside");
     popup.id = "indicator-info-popup";
@@ -378,6 +481,10 @@ function createIndicatorInfoPopup(){
     var description = document.createElement("p");
     description.className = "indicator-info-description";
     popup.appendChild(description);
+
+    var interpretation = document.createElement("div");
+    interpretation.className = "indicator-info-interpretation";
+    popup.appendChild(interpretation);
 
     var formulaSection = document.createElement("section");
     formulaSection.className = "indicator-info-formula";
@@ -439,6 +546,7 @@ function openInfoPopup(button, popup){
 
     popup.querySelector("#indicator-info-title").textContent = indicator.label;
     popup.querySelector(".indicator-info-description").textContent = indicator.description;
+    popup.querySelector(".indicator-info-interpretation").replaceChildren(createIndicatorInterpretation(indicator));
     var formulaSection = popup.querySelector(".indicator-info-formula");
     var formulaContainer = popup.querySelector(".indicator-info-math");
     formulaContainer.replaceChildren();
@@ -604,7 +712,9 @@ function renderInputTable(){
     table.querySelector("thead").replaceChildren(header);
 
     var body = document.createElement("tbody");
-    fields.forEach(function(field){
+    fields.filter(function(field){
+        return !["cash", "accountsReceivable", "endingInventory"].includes(field.key);
+    }).forEach(function(field){
         var row = document.createElement("tr");
         var label = document.createElement("th");
         label.scope = "row";
@@ -613,7 +723,7 @@ function renderInputTable(){
 
         years.forEach(function(year, index){
             var cell = document.createElement("td");
-            if (field.openingInventory && index > 0) {
+            if (balanceFields.includes(field.key) || (field.openingInventory && index > 0)) {
                 var derivedValue = document.createElement("output");
                 derivedValue.className = "derived-value";
                 derivedValue.dataset.derivedField = field.key;
@@ -643,6 +753,219 @@ function renderInputTable(){
         body.appendChild(row);
     });
     table.querySelector("tbody").replaceWith(body);
+}
+
+function appendAccountRow(group, account){
+    var body = document.querySelector("#" + group + "-table tbody");
+    var row = document.createElement("tr");
+    row.className = "account-row";
+    var name = document.createElement("th");
+    name.scope = "row";
+    name.textContent = account.name;
+    var categories = accountCategories[group][account.section];
+    if (group === "liabilities" && categories.length > 0) {
+        var classification = document.createElement("select");
+        classification.className = "account-classification";
+        classification.setAttribute("aria-label", "Clasificación de " + account.name);
+        var options = [{ value: "", label: "Sin clasificar" }].concat(categories.map(function(key){
+            return { value: key, label: fields.find(function(field){ return field.key === key; }).label };
+        }));
+        options.forEach(function(option){
+            var element = document.createElement("option");
+            element.value = option.value;
+            element.textContent = option.label;
+            classification.appendChild(element);
+        });
+        classification.value = account.category;
+        classification.addEventListener("change", function(){
+            account.category = classification.value;
+            updateDerivedValues();
+            updateIndicators();
+            saveSessionState();
+        });
+        name.appendChild(classification);
+    }
+    var deleteButton = document.createElement("button");
+    deleteButton.type = "button";
+    deleteButton.className = "delete-account-button";
+    deleteButton.textContent = "Eliminar";
+    deleteButton.setAttribute("aria-label", "Eliminar cuenta " + account.name);
+    deleteButton.addEventListener("click", function(){
+        if (!window.confirm("¿Eliminar la cuenta \"" + account.name + "\" y su importe de Year " + years[selectedBalanceYear] + "?")) {
+            return;
+        }
+        var accounts = accountsByYear[selectedBalanceYear][group];
+        accounts.splice(accounts.indexOf(account), 1);
+        row.remove();
+        updateAccountTotals();
+        updateDerivedValues();
+        updateIndicators();
+        saveSessionState();
+        body.querySelector('[data-section="' + account.section + '"] .add-account-button').focus();
+    });
+    name.appendChild(deleteButton);
+    var amountCell = document.createElement("td");
+    var amount = document.createElement("input");
+    amount.className = "financial-input";
+    amount.type = "text";
+    amount.inputMode = "decimal";
+    amount.value = account.amount;
+    amount.setAttribute("aria-label", "Importe de " + account.name);
+
+    function validateAmount(){
+        var value = amount.value.replace(/,/g, "").trim();
+        amount.setCustomValidity(value === "" || Number.isFinite(Number(value)) ? "" : "Ingresa un número válido.");
+    }
+    validateAmount();
+    amount.addEventListener("input", function(){
+        account.amount = amount.value;
+        validateAmount();
+        updateAccountTotals();
+        updateDerivedValues();
+        updateIndicators();
+        saveSessionState();
+    });
+
+    amountCell.appendChild(amount);
+    row.appendChild(name);
+    row.appendChild(amountCell);
+    var sectionRow = body.querySelector('[data-section="' + account.section + '"]');
+    var nextRow = sectionRow.nextElementSibling;
+    while (nextRow && !nextRow.classList.contains("account-section") && !nextRow.classList.contains("account-total")) {
+        nextRow = nextRow.nextElementSibling;
+    }
+    body.insertBefore(row, nextRow);
+    return row;
+}
+
+function sumAccounts(accounts){
+    var amounts = accounts.map(function(account){
+        var value = account.amount.replace(/,/g, "").trim();
+        return value === "" ? null : Number(value);
+    }).filter(function(value){ return value !== null; });
+    if (amounts.length === 0 || amounts.some(function(value){ return !Number.isFinite(value); })) {
+        return NaN;
+    }
+    return amounts.reduce(function(sum, value){ return sum + value; }, 0);
+}
+
+function updateAccountTotals(){
+    var accountsByGroup = accountsByYear[selectedBalanceYear];
+    Object.keys(accountSections).forEach(function(group){
+        document.querySelector('[data-account-error="' + group + '"]').hidden = !accountsByGroup[group].some(function(account){
+            var value = account.amount.replace(/,/g, "").trim();
+            return value !== "" && !Number.isFinite(Number(value));
+        });
+    });
+
+    function total(accounts){
+        var value = sumAccounts(accounts);
+        return Number.isFinite(value) ? formatNumber(value) : "—";
+    }
+
+    accountSections.assets.forEach(function(section){
+        document.querySelector('#assets-table [data-section="' + section + '"] output').textContent = total(accountsByGroup.assets.filter(function(account){
+            return account.section === section;
+        }));
+    });
+    document.querySelector('[data-total="assets"] output').textContent = total(accountsByGroup.assets);
+    ["current", "noncurrent"].forEach(function(section){
+        document.querySelector('#liabilities-table [data-section="' + section + '"] output').textContent = total(accountsByGroup.liabilities.filter(function(account){
+            return account.section === section;
+        }));
+    });
+    document.querySelector('[data-total="liabilities"] output').textContent = total(accountsByGroup.liabilities.filter(function(account){
+        return account.section !== "equity";
+    }));
+    document.querySelector('[data-total="liabilitiesAndEquity"] output').textContent = total(accountsByGroup.liabilities);
+}
+
+function renderBalanceYearOptions(){
+    var select = document.getElementById("balance-year");
+    select.replaceChildren();
+    years.forEach(function(year, index){
+        var option = document.createElement("option");
+        option.value = index;
+        option.textContent = "Year " + year;
+        select.appendChild(option);
+    });
+    select.value = String(selectedBalanceYear);
+}
+
+function renderAccountTables(){
+    document.querySelectorAll(".balance-card .account-row").forEach(function(row){ row.remove(); });
+    ["assets", "liabilities"].forEach(function(group){
+        accountsByYear[selectedBalanceYear][group].forEach(function(account){
+            appendAccountRow(group, account);
+        });
+    });
+    updateAccountTotals();
+}
+
+function setupAccountTables(){
+    renderBalanceYearOptions();
+    renderAccountTables();
+    document.getElementById("balance-year").addEventListener("change", function(event){
+        selectedBalanceYear = Number(event.target.value);
+        renderAccountTables();
+    });
+    var dialog = document.getElementById("account-dialog");
+    var form = document.getElementById("account-form");
+    var input = form.elements.accountName;
+    var targetGroup;
+    var targetSection;
+    document.querySelectorAll(".balance-card .add-account-button").forEach(function(button){
+        button.addEventListener("click", function(){
+            var table = button.closest("table");
+            var section = button.closest("[data-section]");
+            targetGroup = table.id === "assets-table" ? "assets" : "liabilities";
+            targetSection = section.dataset.section;
+            document.getElementById("account-dialog-context").textContent =
+                section.querySelector("th span").textContent + " · Year " + years[selectedBalanceYear];
+            dialog.showModal();
+        });
+    });
+    input.addEventListener("input", function(){
+        input.setCustomValidity("");
+    });
+    document.getElementById("cancel-account").addEventListener("click", function(){
+        dialog.close();
+    });
+    dialog.addEventListener("keydown", function(event){
+        if (event.key === "Escape") {
+            event.preventDefault();
+            dialog.close();
+        }
+    });
+    dialog.addEventListener("click", function(event){
+        if (event.target === dialog) {
+            var bounds = dialog.getBoundingClientRect();
+            if (event.clientX < bounds.left || event.clientX > bounds.right || event.clientY < bounds.top || event.clientY > bounds.bottom) {
+                dialog.close();
+            }
+        }
+    });
+    dialog.addEventListener("close", function(){
+        form.reset();
+        input.setCustomValidity("");
+    });
+    form.addEventListener("submit", function(event){
+        event.preventDefault();
+        var name = input.value.trim();
+        if (!name) {
+            input.setCustomValidity("Ingresa el nombre de la cuenta.");
+            input.reportValidity();
+            return;
+        }
+        var account = { name: name, amount: "", section: targetSection, category: "" };
+        accountsByYear[selectedBalanceYear][targetGroup].push(account);
+        appendAccountRow(targetGroup, account);
+        updateAccountTotals();
+        updateDerivedValues();
+        updateIndicators();
+        saveSessionState();
+        dialog.close();
+    });
 }
 
 function renderFormulaCards(){
@@ -685,6 +1008,9 @@ function renderFormulaCards(){
         description.className = "formula-description";
         description.textContent = indicator.description;
         details.appendChild(description);
+        var interpretation = createIndicatorInterpretation(indicator);
+        interpretation.classList.add("formula-interpretation");
+        details.appendChild(interpretation);
         fragment.appendChild(details);
     });
 
@@ -693,9 +1019,22 @@ function renderFormulaCards(){
 
 function getYearValues(yearIndex){
     var result = {};
+    var accounts = accountsByYear[yearIndex];
     fields.forEach(function(field){
         if (field.openingInventory && yearIndex > 0) {
-            result[field.key] = valuesByField.endingInventory[yearIndex - 1];
+            result[field.key] = sumAccounts(accountsByYear[yearIndex - 1].assets.filter(function(account){
+                return assetAccountCategory(account) === "endingInventory";
+            }));
+        } else if (balanceFields.includes(field.key)) {
+            var group = ["currentLiabilities", "totalLiabilities", "equity", "suppliers"].includes(field.key) ? "liabilities" : "assets";
+            result[field.key] = sumAccounts(accounts[group].filter(function(account){
+                if (field.key === "totalAssets") return true;
+                if (field.key === "currentAssets") return account.section === "current";
+                if (field.key === "currentLiabilities") return account.section === "current";
+                if (field.key === "totalLiabilities") return account.section !== "equity";
+                if (field.key === "equity") return account.section === "equity";
+                return (group === "assets" ? assetAccountCategory(account) : account.category) === field.key;
+            }));
         } else {
             result[field.key] = valuesByField[field.key][yearIndex];
         }
@@ -773,9 +1112,9 @@ function updateIndicators(){
 }
 
 function updateDerivedValues(){
-    document.querySelectorAll("[data-derived-field='openingInventory']").forEach(function(element){
+    document.querySelectorAll("[data-derived-field]").forEach(function(element){
         var yearIndex = Number(element.dataset.yearIndex);
-        var value = valuesByField.endingInventory[yearIndex - 1];
+        var value = getYearValues(yearIndex)[element.dataset.derivedField];
         element.textContent = formatNumber(value);
     });
 }
@@ -783,11 +1122,13 @@ function updateDerivedValues(){
 function addYear(){
     var yearIndex = years.length;
     years.push(yearIndex + 1);
+    accountsByYear.push({ assets: [], liabilities: [] });
     fields.forEach(function(field){
         valuesByField[field.key].push(NaN);
     });
     renderSummaryTable();
     renderInputTable();
+    renderBalanceYearOptions();
     updateDerivedValues();
     updateIndicators();
     saveSessionState();
@@ -810,6 +1151,7 @@ function handleInput(event){
 
 document.addEventListener("DOMContentLoaded", function(){
     restoreSessionState();
+    setupAccountTables();
     renderSummaryTable();
     renderInputTable();
     renderFormulaCards();
