@@ -1,0 +1,472 @@
+:root {
+    color-scheme: light;
+    font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+    color: #172b4d;
+    background: #f3f6fb;
+}
+
+* {
+    box-sizing: border-box;
+}
+
+body {
+    min-width: 320px;
+    margin: 0;
+    padding: 48px 24px;
+    background:
+        radial-gradient(ellipse at top left, rgba(33, 150, 133, 0.10), transparent 34rem),
+        #f3f6fb;
+}
+
+main {
+    width: min(100%, 1000px);
+    margin: 0 auto;
+}
+
+.page-heading {
+    margin-bottom: 28px;
+}
+
+.eyebrow {
+    margin: 0 0 8px;
+    color: #168477;
+    font-size: 0.76rem;
+    font-weight: 750;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+}
+
+h1 {
+    margin: 0;
+    color: #132744;
+    font-size: clamp(1.8rem, 4vw, 2.4rem);
+    letter-spacing: -0.04em;
+}
+
+.page-heading p:last-child {
+    margin: 10px 0 0;
+    color: #64748b;
+}
+
+.storage-notice:not([hidden]) {
+    margin-top: 12px;
+    padding: 10px 14px;
+    border: 1px solid #f0c7a6;
+    border-radius: 9px;
+    background: #fff8f1;
+    color: #8a4b16;
+    font-size: 0.88rem;
+}
+
+.card {
+    margin-top: 20px;
+    overflow: hidden;
+    border: 1px solid #e3eaf2;
+    border-radius: 16px;
+    background: #fff;
+    box-shadow: 0 12px 32px rgba(28, 47, 74, 0.06);
+}
+
+.card-heading {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 20px 24px;
+    border-bottom: 1px solid #e8eef5;
+}
+
+details.card > summary {
+    cursor: pointer;
+    list-style: none;
+}
+
+details.card > summary::-webkit-details-marker {
+    display: none;
+}
+
+.disclosure-icon {
+    display: grid;
+    width: 30px;
+    height: 30px;
+    flex: 0 0 auto;
+    place-items: center;
+    border: 1px solid #e3eaf2;
+    border-radius: 50%;
+    color: #64748b;
+    font-size: 1.15rem;
+    line-height: 1;
+    transition: transform 160ms ease;
+}
+
+.disclosure-icon::before {
+    content: "+";
+}
+
+details[open] .disclosure-icon {
+    transform: rotate(45deg);
+}
+
+details.card:not([open]) > summary {
+    border-bottom: 0;
+}
+
+details.card:not([open]) > :not(summary) {
+    display: none;
+}
+
+.section-heading {
+    margin: 32px 0 16px;
+}
+
+.section-heading h2 {
+    color: #1d3555;
+    font-size: 1.25rem;
+}
+
+.section-heading p {
+    margin: 8px 0 0;
+    color: #64748b;
+    font-size: 0.9rem;
+}
+
+.section-heading .gav-definition {
+    max-width: 760px;
+    margin-top: 14px;
+    padding: 12px 16px;
+    border-left: 3px solid #45a99b;
+    border-radius: 0 8px 8px 0;
+    background: #edf8f6;
+    color: #385b60;
+    line-height: 1.55;
+}
+
+.formula-card h3 {
+    margin: 0;
+    color: #1d3555;
+    font-size: 1rem;
+}
+
+.indicator-title,
+.indicator-heading {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+}
+
+.indicator-info-button {
+    display: inline-grid;
+    width: 20px;
+    height: 20px;
+    flex: 0 0 auto;
+    place-items: center;
+    padding: 0;
+    border: 1px solid #9aabba;
+    border-radius: 50%;
+    background: #fff;
+    color: #64788f;
+    font-size: 0.75rem;
+    font-weight: 750;
+    line-height: 1;
+    vertical-align: middle;
+}
+
+.indicator-info-button:hover {
+    transform: none;
+    border-color: #167f73;
+    background: #edf8f6;
+    color: #11695f;
+}
+
+.indicator-info-button[aria-expanded="true"] {
+    border-color: #167f73;
+    background: #167f73;
+    color: #fff;
+}
+
+.indicator-info-button:focus-visible {
+    outline: 3px solid rgba(22, 127, 115, 0.25);
+    outline-offset: 2px;
+}
+
+.indicator-info-popup {
+    position: fixed;
+    z-index: 1000;
+    width: min(340px, calc(100vw - 24px));
+    max-height: min(420px, calc(100vh - 24px));
+    overflow-y: auto;
+    padding: 18px 20px;
+    border: 1px solid #dce5ee;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 16px 40px rgba(28, 47, 74, 0.2);
+}
+
+.indicator-info-popup[hidden] {
+    display: none;
+}
+
+.indicator-info-popup h3 {
+    margin: 0;
+    color: #1d3555;
+    font-size: 1rem;
+}
+
+.indicator-info-popup .indicator-info-description {
+    margin: 10px 0 16px;
+    color: #52657d;
+    font-size: 0.88rem;
+    line-height: 1.5;
+}
+
+.indicator-info-formula {
+    margin-bottom: 16px;
+}
+
+.indicator-info-formula[hidden] {
+    display: none;
+}
+
+.indicator-info-math {
+    overflow-x: auto;
+    padding: 10px 12px;
+    border-radius: 8px;
+    background: #f8fafc;
+    color: #1d3555;
+}
+
+.indicator-info-math math {
+    font-size: 0.95rem;
+}
+
+.indicator-info-popup h4 {
+    margin: 0 0 7px;
+    color: #334865;
+    font-size: 0.8rem;
+}
+
+.indicator-info-variables {
+    margin: 0;
+    padding-left: 20px;
+    color: #52657d;
+    font-size: 0.84rem;
+    line-height: 1.55;
+}
+
+.formula-display {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    padding: 18px 24px;
+    border-bottom: 1px solid #edf1f6;
+    background: #fbfcfe;
+}
+
+.formula-display > span {
+    color: #728198;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+.formula-display math {
+    max-width: 100%;
+    overflow-x: auto;
+    color: #1d3555;
+    font-size: 1.05rem;
+}
+
+.formula-description {
+    margin: 0;
+    padding: 16px 24px 20px;
+    color: #52657d;
+    font-size: 0.9rem;
+    line-height: 1.6;
+}
+
+.table-note {
+    margin: 0;
+    padding: 14px 20px 18px;
+    color: #64748b;
+    font-size: 0.82rem;
+    line-height: 1.5;
+}
+
+h2 {
+    margin: 0;
+    color: #1d3555;
+    font-size: 1.05rem;
+}
+
+.table-scroll {
+    overflow-x: auto;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    white-space: nowrap;
+}
+
+th,
+td {
+    padding: 15px 20px;
+    border-bottom: 1px solid #edf1f6;
+    text-align: left;
+}
+
+thead th {
+    background: #f8fafc;
+    color: #64748b;
+    font-size: 0.75rem;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+}
+
+tbody tr:last-child > * {
+    border-bottom: 0;
+}
+
+tbody th {
+    color: #334865;
+    font-size: 0.9rem;
+    font-weight: 650;
+}
+
+tbody td {
+    color: #233a58;
+    font-variant-numeric: tabular-nums;
+}
+
+#indicadores_financieros tbody td {
+    min-width: 120px;
+    font-size: 1.15rem;
+    font-weight: 750;
+}
+
+#indicadores_financieros tbody td:first-of-type {
+    color: #126f65;
+}
+
+#indicadores_financieros tbody th[scope="row"] .indicator-info-button {
+    margin-left: 10px;
+    vertical-align: 2px;
+}
+
+.year-value {
+    display: block;
+}
+
+.year-percentage {
+    display: block;
+    margin-top: 3px;
+    color: #64748b;
+    font-size: 0.82rem;
+    font-weight: 650;
+    line-height: 1.2;
+}
+
+.year-variation {
+    display: block;
+    margin-top: 5px;
+    color: #728198;
+    font-size: 0.72rem;
+    font-weight: 650;
+    line-height: 1.2;
+}
+
+.year-variation.positive {
+    color: #16845b;
+}
+
+.year-variation.negative {
+    color: #c04c4c;
+}
+
+.financial-input {
+    width: 140px;
+    padding: 9px 10px;
+    border: 1px solid #dce5ee;
+    border-radius: 7px;
+    background: #fff;
+    color: #233a58;
+    font: inherit;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+.financial-input:hover {
+    border-color: #a9c8c3;
+}
+
+.financial-input:focus {
+    border-color: #45a99b;
+    outline: 3px solid rgba(69, 169, 155, 0.16);
+}
+
+.derived-value {
+    display: inline-block;
+    min-width: 140px;
+    padding: 9px 10px;
+    color: #728198;
+    font-variant-numeric: tabular-nums;
+    text-align: right;
+}
+
+button {
+    padding: 10px 14px;
+    border: 0;
+    border-radius: 9px;
+    background: #167f73;
+    color: #fff;
+    font: inherit;
+    font-size: 0.84rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background-color 140ms ease, transform 140ms ease;
+}
+
+button:hover {
+    transform: translateY(-1px);
+    background: #11695f;
+}
+
+button:focus-visible {
+    outline: 3px solid rgba(22, 127, 115, 0.3);
+    outline-offset: 3px;
+}
+
+@media (max-width: 600px) {
+    body {
+        padding: 28px 14px;
+    }
+
+    .card-heading {
+        padding: 16px;
+    }
+
+    .formula-display {
+        align-items: flex-start;
+        flex-direction: column;
+        gap: 8px;
+        padding: 16px;
+    }
+
+    .formula-description {
+        padding: 14px 16px 18px;
+    }
+
+    .financial-input,
+    .derived-value {
+        width: 125px;
+        min-width: 125px;
+    }
+
+    th,
+    td {
+        padding: 13px 15px;
+    }
+}

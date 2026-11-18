@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Indicadores Financieros</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <main>
+        <header class="page-heading">
+            <p class="eyebrow">Análisis financiero</p>
+            <h1>Indicadores financieros</h1>
+            <p>Introduce los datos financieros de cada año para calcular los principales indicadores de la empresa.</p>
+            <p id="storage_status" class="storage-notice" role="status" aria-live="polite" hidden></p>
+        </header>
+
+        <section class="card" aria-labelledby="indicators-heading">
+            <div class="card-heading">
+                <h2 id="indicators-heading">Resumen de indicadores</h2>
+            </div>
+            <div class="table-scroll">
+                <table id="indicadores_financieros">
+                    <thead></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+        </section>
+
+        <section class="card" aria-labelledby="data-heading">
+            <div class="card-heading">
+                <h2 id="data-heading">Datos financieros por año</h2>
+            </div>
+            <div class="table-scroll">
+                <table id="financial_inputs">
+                    <thead></thead>
+                    <tbody></tbody>
+                </table>
+            </div>
+            <p class="table-note">Para los indicadores expresados en días se utiliza un período de 360 días, como en la nota técnica. Las existencias iniciales de Year 2 en adelante se toman automáticamente del cierre del año anterior. Completa las existencias iniciales de Year 1 para calcular sus días de pago a proveedores.</p>
+        </section>
+
+        <section aria-labelledby="formulas-heading">
+            <div class="section-heading">
+                <h2 id="formulas-heading">Fórmulas de los indicadores</h2>
+                <p>Abre cada indicador para consultar su fórmula.</p>
+                <p class="gav-definition"><strong>GAV</strong> significa <strong>Gastos de Administración y Ventas</strong>: gastos operativos de administrar y vender, separados del costo de ventas y la depreciación en esta nota técnica.</p>
+            </div>
+            <div id="indicator_formulas"></div>
+        </section>
+    </main>
+    
+    <script src="script.js" defer></script>
+
+</body>
+</html>
